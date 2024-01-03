@@ -8,7 +8,11 @@ public class TheMove : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed;
 
+    public float dashSpeed;
+
     public float groundDrag;
+
+    [SerializeField] private TrailRenderer tr;
 
     private bool ActivateAnimation = false;
     private bool isMovingForward = false;
@@ -61,6 +65,13 @@ public class TheMove : MonoBehaviour
 
     public float wallrunSpeed;
 
+    private bool dasher = true;
+    private float dashingPower = 60f; 
+    private float dashingTime = 0.2f;
+    private float dashingCooldown = 5f;
+
+
+
     //Animator m_Animator;
     //public Animator animator;
 
@@ -73,17 +84,22 @@ public class TheMove : MonoBehaviour
         sprinting,
         wallrunning,
         climbing,
+        dashing,
         air,
     }
+
+    public bool dashing;
 
     public bool wallrunning;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        // Tr = GetComponent<TrailRenderer>();
         rb.freezeRotation = true;
         /*m_Animator = FindObjectOfType<Animator>();*/
         readyToJump = true;
+        tr.emitting = false;
     }
 
     private void Update()
@@ -101,6 +117,10 @@ public class TheMove : MonoBehaviour
         else
             rb.drag = 0;
 
+        if (Input.GetKeyDown(KeyCode.LeftShift) && dasher && !isGrounded)
+        {
+             StartCoroutine(Dash());
+        }
 
     }
 
@@ -254,8 +274,14 @@ public class TheMove : MonoBehaviour
     }
     private void StateHandler()
     {
+        if (dasher)
+        {
+            state = MovementState.dashing; 
+            moveSpeed = dashSpeed;
+        }
+
         // Mode - wallrunning
-        if (wallrunning)
+        else if (wallrunning)
         {
             state = MovementState.wallrunning;
             moveSpeed = wallrunSpeed;
@@ -263,6 +289,16 @@ public class TheMove : MonoBehaviour
     }
 
 
+    private IEnumerator Dash()
+    {
+        dasher = true;
+        tr.emitting = true;
+       // velocity = new Vector3(transform.forward.x * dashingPower, 0f, transform.forward.z * dashingPower);
+        yield return new WaitForSeconds(dashingTime);
+        velocity = Vector3.zero;
+        tr.emitting = false;
+        yield return new WaitForSeconds(dashingCooldown); 
+        dasher = true;
 
-
+    }
 }
