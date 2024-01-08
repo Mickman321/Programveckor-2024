@@ -32,6 +32,8 @@ public class Dashing : MonoBehaviour
 
     [Header("Input")]
     public KeyCode dashKey = KeyCode.LeftShift;
+    private bool wPressed;
+    private bool leftshiftPressed;
 
     private void Start()
     {
@@ -41,11 +43,80 @@ public class Dashing : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(dashKey))
+         if (Input.GetKeyDown(dashKey))
+         {
             Dash();
+         }
+          if (dashCdTimer > 0)
+             dashCdTimer -= Time.deltaTime;
 
-        if (dashCdTimer > 0)
-            dashCdTimer -= Time.deltaTime;
+        /* if (Input.GetKey(dashKey) || Input.GetKey("w"))
+         {
+             Dash();
+         }
+
+         else if (Input.GetKey(dashKey) || Input.GetKey("d"))
+         {
+             Dash2();
+         }
+         //  Dash();
+
+        */
+        /* if (Input.GetKey(dashKey))
+         {
+             if (Input.GetKey(KeyCode.W))
+             {
+                 Dash();
+             }
+
+             else if (Input.GetKey(KeyCode.D))
+             {
+                 Dash2();
+             }
+         }*/
+
+        /*  if (Input.GetKeyDown(KeyCode.W))
+          {
+              if (leftshiftPressed)
+              {
+                  Debug.Log("Both pressed");
+                  pm.dashing = true;
+
+              }
+              else
+              {
+                  Debug.Log("W pressed");
+                  pm.dashing = false;
+              }
+
+              wPressed = true;
+          }
+          if (Input.GetKeyDown(KeyCode.LeftShift))
+          {
+              if (wPressed)
+              {
+                  Debug.Log("Both pressed");
+                  pm.dashing = true;
+              }
+              else
+              {
+                  Debug.Log("LeftShift pressed");
+                  pm.dashing = false;
+              }
+
+              leftshiftPressed = true;
+          }
+
+          if (Input.GetKeyUp(KeyCode.W))
+          {
+              wPressed = false;
+          }
+
+          if (Input.GetKeyUp(KeyCode.LeftShift))
+          {
+              leftshiftPressed = false;
+              Dash();
+          }*/
     }
 
     private void Dash()
@@ -60,19 +131,137 @@ public class Dashing : MonoBehaviour
 
         Transform forwardT;
 
-       /* if (useCameraForward)
-            forwardT = playerCam; /// where you're looking
-        else
-            forwardT = orientation; */ /// where you're facing (no up or down)
+        /* if (useCameraForward)
+             forwardT = playerCam; /// where you're looking
+         else
+             forwardT = orientation; */ /// where you're facing (no up or down)
 
-       // Vector3 direction = GetDirection(forwardT);
+        // Vector3 direction = GetDirection(forwardT);
 
-        Vector3 forceToApply = orientation.forward * dashForce + orientation.up * dashUpwardForce;
+        // Vector3 forceToApply = orientation.forward * dashForce + orientation.up * dashUpwardForce;
+        
+        
+            rb.velocity = orientation.forward * dashForce + orientation.up * dashUpwardForce;
+        
+        
 
-      //  if (disableGravity)
-         //   rb.useGravity = false;
+        //  if (disableGravity)
+        //   rb.useGravity = false;
 
-        delayedForceToApply = forceToApply;
+        delayedForceToApply = rb.velocity;
+
+        //delayedForceToApply = forceToApply;
+        Invoke(nameof(DelayedDashForce), 0.025f);
+
+        Invoke(nameof(ResetDash), dashDuration);
+    }
+
+    private void Dash2()
+    {
+        if (dashCdTimer > 0) return;
+        else dashCdTimer = dashCd;
+
+        pm.dashing = true;
+        // pm.maxYSpeed = maxDashYSpeed;
+
+        // cam.DoFov(dashFov);
+
+        Transform forwardT;
+
+        /* if (useCameraForward)
+             forwardT = playerCam; /// where you're looking
+         else
+             forwardT = orientation; */ /// where you're facing (no up or down)
+
+        // Vector3 direction = GetDirection(forwardT);
+
+        // Vector3 forceToApply = orientation.forward * dashForce + orientation.up * dashUpwardForce;
+        
+        
+            rb.velocity = orientation.right * dashForce + orientation.up * dashUpwardForce;
+        
+
+
+        //  if (disableGravity)
+        //   rb.useGravity = false;
+
+        delayedForceToApply = rb.velocity;
+
+        //delayedForceToApply = forceToApply;
+        Invoke(nameof(DelayedDashForce), 0.025f);
+
+        Invoke(nameof(ResetDash), dashDuration);
+    }
+
+    private void Dash3()
+    {
+        if (dashCdTimer > 0) return;
+        else dashCdTimer = dashCd;
+
+        pm.dashing = true;
+        // pm.maxYSpeed = maxDashYSpeed;
+
+        // cam.DoFov(dashFov);
+
+        Transform forwardT;
+
+        /* if (useCameraForward)
+             forwardT = playerCam; /// where you're looking
+         else
+             forwardT = orientation; */ /// where you're facing (no up or down)
+
+        // Vector3 direction = GetDirection(forwardT);
+
+        // Vector3 forceToApply = orientation.forward * dashForce + orientation.up * dashUpwardForce;
+        if (Input.GetKey(dashKey))
+        {
+            rb.velocity = orientation.forward * dashForce + orientation.up * dashUpwardForce;
+        }
+
+
+        //  if (disableGravity)
+        //   rb.useGravity = false;
+
+        delayedForceToApply = rb.velocity;
+
+        //delayedForceToApply = forceToApply;
+        Invoke(nameof(DelayedDashForce), 0.025f);
+
+        Invoke(nameof(ResetDash), dashDuration);
+    }
+
+    private void Dash4()
+    {
+        if (dashCdTimer > 0) return;
+        else dashCdTimer = dashCd;
+
+        pm.dashing = true;
+        // pm.maxYSpeed = maxDashYSpeed;
+
+        // cam.DoFov(dashFov);
+
+        Transform forwardT;
+
+        /* if (useCameraForward)
+             forwardT = playerCam; /// where you're looking
+         else
+             forwardT = orientation; */ /// where you're facing (no up or down)
+
+        // Vector3 direction = GetDirection(forwardT);
+
+        // Vector3 forceToApply = orientation.forward * dashForce + orientation.up * dashUpwardForce;
+        if (Input.GetKey(dashKey))
+        {
+            rb.velocity = orientation.forward * dashForce + orientation.up * dashUpwardForce;
+        }
+
+
+        //  if (disableGravity)
+        //   rb.useGravity = false;
+
+        delayedForceToApply = rb.velocity;
+
+        //delayedForceToApply = forceToApply;
         Invoke(nameof(DelayedDashForce), 0.025f);
 
         Invoke(nameof(ResetDash), dashDuration);
