@@ -139,9 +139,12 @@ public class Dashing : MonoBehaviour
         // Vector3 direction = GetDirection(forwardT);
 
         // Vector3 forceToApply = orientation.forward * dashForce + orientation.up * dashUpwardForce;
-        
-        
-            rb.velocity = orientation.forward * dashForce + orientation.up * dashUpwardForce;
+
+        //new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+        rb.AddForce(rb.velocity.normalized * dashForce, ForceMode.Impulse);    
+
+           // rb.velocity = orientation.forward * dashForce + orientation.up * dashUpwardForce;
         
         
 
@@ -177,8 +180,9 @@ public class Dashing : MonoBehaviour
 
         // Vector3 forceToApply = orientation.forward * dashForce + orientation.up * dashUpwardForce;
         
+            
         
-            rb.velocity = orientation.right * dashForce + orientation.up * dashUpwardForce;
+           rb.velocity = orientation.right * dashForce + orientation.up * dashUpwardForce;
         
 
 
