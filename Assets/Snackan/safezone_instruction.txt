@@ -1,0 +1,2 @@
+Instruktioner:
+För att lägga till ditt eget ljud, ändra variabeln "PlaceholderOne" till ditt AudioClip, nu kommer "SafeZone1" spela ditt ljud.
