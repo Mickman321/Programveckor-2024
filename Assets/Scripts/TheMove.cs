@@ -19,6 +19,7 @@ public class TheMove : MonoBehaviour
     private bool isMovingBackwards = false;
 
     public float jumpForce;
+    public float jumpForceDown;
     public float jumpCooldown;
     public float airMultiplier;
     bool readyToJump;
@@ -127,6 +128,7 @@ public class TheMove : MonoBehaviour
              StartCoroutine(Dash());
         }
 
+        Jump();
     }
 
     private void FixedUpdate()
@@ -169,7 +171,7 @@ public class TheMove : MonoBehaviour
         */
 
         // when to jump
-        if (Input.GetButtonDown("Jump") && readyToJump && grounded)
+      /*  if (Input.GetButtonDown("Jump") && readyToJump && grounded)
         {
             readyToJump = false;
 
@@ -262,30 +264,38 @@ public class TheMove : MonoBehaviour
         exitingSlope = true;
 
         // reset y velocity
-        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+       // rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
-        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        //rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
 
         //m_Animator.SetTrigger("Jump");
 
-        /* if (grounded == true && Input.GetButtonDown("Jump")) // Den här kollar om spelaren är på marken om den är så ska man kunna man kunna trycka på space för att hoppa.
+         if (grounded == true && Input.GetButtonDown("Jump")) // Den här kollar om spelaren är på marken om den är så ska man kunna man kunna trycka på space för att hoppa.
          {
              print("ground jump");
              isJumping = true;
              jumpTimeCounter = jumpTime;
-             rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-         }
+            // rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+
+            rb.AddForce(velocity = Vector3.up * jumpHeight);
+            // rb.AddForce(transform.up * jumpHeight);
+        }
 
          if (Input.GetButton("Jump") && isJumping == true) /* Den här koden ser till så att när spelaren trycker på space och inte håller ner space
                                                                 så blir det ett kortare hopp och den ser också till så att det inte funkar i luften.*/
-        /* {
+         {
 
 
              if (jumpTimeCounter > 0)
              {
                  print("continue jump");
-                 rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-                 jumpTimeCounter -= Time.deltaTime;
+               //  rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+
+                 rb.AddForce(velocity = Vector3.up * jumpHeight);
+
+               // velocity = Vector3.up * jumpHeight;
+
+                jumpTimeCounter -= Time.deltaTime;
              }
              else
              {
@@ -293,10 +303,14 @@ public class TheMove : MonoBehaviour
                  isJumping = false;
              }
          }
-         else
+         else if (grounded == false && (Input.GetButton("Jump") == false || isJumping == false))
          {
              isJumping = false;
-         }*/
+            //rb.AddForce(-transform.up * jumpForce, ForceMode.Impulse);
+          //  rb.AddForce(Vector3.down * 80f, ForceMode.Force);
+        }
+
+
     }
     private void ResetJump()
     {
