@@ -15,10 +15,12 @@ public class AmbientController : MonoBehaviour
 
     [SerializeField]
     AudioClip PlaceholderTwo;
+
+    public bool inSafeZone;
     // Start is called before the first frame update
     void Start()
     {
-        
+        inSafeZone = false;
     }
 
     // Update is called once per frame
@@ -72,8 +74,8 @@ public class AmbientController : MonoBehaviour
         {
             if (trigger == other.gameObject)
             {
-               
-               
+
+                inSafeZone = true;
                 doSound(trigger.name);
                 audioSource.time = 0;
                 Debug.Log("Trigger Enter");
@@ -88,6 +90,7 @@ public class AmbientController : MonoBehaviour
         {
             if (trigger == other.gameObject)
             {
+                inSafeZone = false;
                 Debug.Log("Trigger Exit");
                 StartCoroutine(TweenVolume(false));
             }
