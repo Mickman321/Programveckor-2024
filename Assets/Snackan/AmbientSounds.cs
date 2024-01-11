@@ -30,35 +30,45 @@ public class AmbientSounds : MonoBehaviour
             if (rb.velocity.magnitude == 0)
             {
                 print("standstill");
-                Invoke("randomWalkSound", Random.Range(10, 20));
-                yield return new WaitForSeconds(10f);
+                Invoke("randomStandstillSound", Random.Range(20, 30));
+                yield return new WaitForSeconds(20f);
             }
             else
             {
                 print("moving");
-                Invoke("randomStandstillSound", Random.Range(5, 15));
+                Invoke("randomWalkSound", Random.Range(5, 15));
                 yield return new WaitForSeconds(5f);
             }
         }
         yield return new WaitUntil(() => ac.inSafeZone == false);
         goto MarkerA;
     }
-    void PlaySound(AudioClip sound)
+   /* void PlaySound(AudioClip sound)
     {
         audioSource.PlayOneShot(sound);
     }
-
+   */
+   void ResetVolume()
+    {
+        audioSource.volume = 0;
+    }
     void randomWalkSound()
     {
+        audioSource.Stop();
+        audioSource.volume = 1;
+        Invoke("ResetVolume", 5);
         AudioClip randomSound = Moving[Random.Range(0, Moving.Length)];
         print(randomSound);
-        PlaySound(randomSound);
+        audioSource.PlayOneShot(randomSound);
     }
     void randomStandstillSound()
     {
+        audioSource.Stop();
+        audioSource.volume = 1;
+        Invoke("ResetVolume", 5);
         AudioClip randomSound = Standstill[Random.Range(0, Standstill.Length)];
         print(randomSound);
-        PlaySound(randomSound);
+        audioSource.PlayOneShot(randomSound);
     }
   
     // Update is called once per frame
