@@ -141,11 +141,11 @@ public class Dashing : MonoBehaviour
         // Vector3 forceToApply = orientation.forward * dashForce + orientation.up * dashUpwardForce;
 
         //new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-        Vector3 tempVelocity = rb.velocity.normalized;
+      /*  Vector3 tempVelocity = rb.velocity.normalized;
         tempVelocity.y = 0;
-        rb.AddForce(tempVelocity * dashForce, ForceMode.Impulse);    
+        rb.AddForce(tempVelocity * dashForce, ForceMode.Impulse);    */
 
-           // rb.velocity = orientation.forward * dashForce + orientation.up * dashUpwardForce;
+            rb.velocity = orientation.forward * dashForce + orientation.up * dashUpwardForce;
         
         
 

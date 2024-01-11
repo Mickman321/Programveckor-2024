@@ -128,12 +128,30 @@ public class TheMove : MonoBehaviour
              StartCoroutine(Dash());
         }
 
-        Jump();
+       // Jump();
+        if (grounded == true && Input.GetButtonDown("Jump")) // Den här kollar om spelaren är på marken om den är så ska man kunna man kunna trycka på space för att hoppa.
+        {
+            print("ground jump");
+            //isJumping = true;
+            //jumpTimeCounter = jumpTime;
+            rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+
+            // rb.AddForce(velocity = Vector3.up * jumpHeight);
+            // rb.AddForce(transform.up * jumpHeight);
+        }
     }
+
+    
 
     private void FixedUpdate()
     {
         MovePlayer();
+
+        if(!grounded && !Input.GetButton("Jump"))
+        {
+            rb.AddForce(-transform.up * jumpForceDown);
+
+        }
     }
 
     private void MyInput()
@@ -264,9 +282,14 @@ public class TheMove : MonoBehaviour
         exitingSlope = true;
 
         // reset y velocity
-       // rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+       /* if (grounded == true && Input.GetButtonDown("Jump"))
+        {
+            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
-        //rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+            rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        }*/
+
+            
 
         //m_Animator.SetTrigger("Jump");
 
@@ -275,9 +298,9 @@ public class TheMove : MonoBehaviour
              print("ground jump");
              isJumping = true;
              jumpTimeCounter = jumpTime;
-            // rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+             rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
 
-            rb.AddForce(velocity = Vector3.up * jumpHeight);
+           // rb.AddForce(velocity = Vector3.up * jumpHeight);
             // rb.AddForce(transform.up * jumpHeight);
         }
 
@@ -289,9 +312,9 @@ public class TheMove : MonoBehaviour
              if (jumpTimeCounter > 0)
              {
                  print("continue jump");
-               //  rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+                // rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
 
-                 rb.AddForce(velocity = Vector3.up * jumpHeight);
+                 //rb.AddForce(velocity = Vector3.up * jumpHeight);
 
                // velocity = Vector3.up * jumpHeight;
 
