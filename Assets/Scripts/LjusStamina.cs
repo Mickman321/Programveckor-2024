@@ -12,6 +12,7 @@ public class LjusStamina : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftControl))
         {
             Stamina = Stamina -= 1 * Time.deltaTime * 5;
+            print("Working");
         }
 
 
