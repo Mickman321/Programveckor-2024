@@ -22,6 +22,34 @@ public class AmbientSounds : MonoBehaviour
         ac = FindObjectOfType<AmbientController>();
         StartCoroutine(goofyuncle());
     }
+
+    IEnumerator TweenVolume(bool increase)
+    {
+        yield return new WaitForSeconds(3);
+        if (increase == true)
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                audioSource.volume += 0.01f;
+                yield return new WaitForSeconds(0.01f);
+            }
+
+
+        }
+        if (increase == false)
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                audioSource.volume -= 0.01f;
+                yield return new WaitForSeconds(0.01f);
+            }
+
+
+        }
+
+        yield return "finished";
+
+    }
     IEnumerator goofyuncle()
     {
         MarkerA:
@@ -36,8 +64,8 @@ public class AmbientSounds : MonoBehaviour
             else
             {
                 print("moving");
-                Invoke("randomWalkSound", Random.Range(5, 15));
-                yield return new WaitForSeconds(5f);
+                Invoke("randomWalkSound", Random.Range(30, 50));
+                yield return new WaitForSeconds(30f);
             }
         }
         yield return new WaitUntil(() => ac.inSafeZone == false);
@@ -60,6 +88,7 @@ public class AmbientSounds : MonoBehaviour
         AudioClip randomSound = Moving[Random.Range(0, Moving.Length)];
         print(randomSound);
         audioSource.PlayOneShot(randomSound);
+        StartCoroutine(TweenVolume(false));
     }
     void randomStandstillSound()
     {
@@ -69,6 +98,7 @@ public class AmbientSounds : MonoBehaviour
         AudioClip randomSound = Standstill[Random.Range(0, Standstill.Length)];
         print(randomSound);
         audioSource.PlayOneShot(randomSound);
+        StartCoroutine(TweenVolume(false));
     }
   
     // Update is called once per frame
