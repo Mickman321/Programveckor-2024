@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TheWallRun : MonoBehaviour
 {
+    LjusStamina staminaScript;
+
     [Header("Wallrunning")]
     public LayerMask whatIsWall;
     public LayerMask whatIsGround;
@@ -50,18 +52,27 @@ public class TheWallRun : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         pm = GetComponent<TheMove>();
+        staminaScript = GetComponentInParent<LjusStamina>();
+        
     }
 
     private void Update()
     {
         CheckForWall();
         StateMachine();
+
     }
 
     private void FixedUpdate()
     {
-        if (pm.wallrunning)
+        if (pm.wallrunning && staminaScript.staminaD == true )
+        {
             WallRunningMovement();
+
+           // && staminaScript.Stamina > 1
+        }
+           
+
     }
 
     private void CheckForWall()
@@ -101,7 +112,11 @@ public class TheWallRun : MonoBehaviour
             }
 
             // wall jump
-            if (Input.GetKeyDown(jumpKey)) WallJump();
+            if (staminaScript.staminaD == true && Input.GetKeyDown(jumpKey)) 
+            {
+                WallJump();
+                
+            }
         }
 
         // State 2 - Exiting

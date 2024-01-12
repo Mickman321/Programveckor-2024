@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LjusStamina : MonoBehaviour
 {
+    //oscars script
     public float Stamina = 100;
     public float MaxStamina = 100f;
     public bool staminaD = false;

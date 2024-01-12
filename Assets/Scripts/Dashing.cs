@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Dashing : MonoBehaviour
 {
+    LjusStamina staminaScript;
+
     [Header("References")]
     public Transform orientation;
     public Transform playerCam;
@@ -39,6 +41,7 @@ public class Dashing : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         pm = GetComponent<TheMove>();
+        staminaScript = GetComponentInParent<LjusStamina>();
     }
 
     private void Update()
@@ -121,43 +124,55 @@ public class Dashing : MonoBehaviour
 
     private void Dash()
     {
-        if (dashCdTimer > 0) return;
-        else dashCdTimer = dashCd;
+       
 
-        pm.dashing = true;
-       // pm.maxYSpeed = maxDashYSpeed;
+       if(staminaScript.staminaD == true) 
+       {
+            if (dashCdTimer > 0) return;
+            else dashCdTimer = dashCd;
 
-       // cam.DoFov(dashFov);
+            pm.dashing = true;
 
-        Transform forwardT;
+            Transform forwardT;
 
-        /* if (useCameraForward)
-             forwardT = playerCam; /// where you're looking
-         else
-             forwardT = orientation; */ /// where you're facing (no up or down)
+            // pm.maxYSpeed = maxDashYSpeed;
 
-        // Vector3 direction = GetDirection(forwardT);
+            // cam.DoFov(dashFov);
 
-        // Vector3 forceToApply = orientation.forward * dashForce + orientation.up * dashUpwardForce;
 
-        //new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-      /*  Vector3 tempVelocity = rb.velocity.normalized;
-        tempVelocity.y = 0;
-        rb.AddForce(tempVelocity * dashForce, ForceMode.Impulse);    */
+
+            /* if (useCameraForward)
+                 forwardT = playerCam; /// where you're looking
+             else
+                 forwardT = orientation; */ /// where you're facing (no up or down)
+
+            // Vector3 direction = GetDirection(forwardT);
+
+            // Vector3 forceToApply = orientation.forward * dashForce + orientation.up * dashUpwardForce;
+
+            //new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+            /*  Vector3 tempVelocity = rb.velocity.normalized;
+              tempVelocity.y = 0;
+              rb.AddForce(tempVelocity * dashForce, ForceMode.Impulse);    */
 
             rb.velocity = orientation.forward * dashForce + orientation.up * dashUpwardForce;
+
+
+
+            //  if (disableGravity)
+            //   rb.useGravity = false;
+
+            delayedForceToApply = rb.velocity;
+
+            //delayedForceToApply = forceToApply;
+            Invoke(nameof(DelayedDashForce), 0.025f);
+
+            Invoke(nameof(ResetDash), dashDuration);
+       }
+
+
         
-        
-
-        //  if (disableGravity)
-        //   rb.useGravity = false;
-
-        delayedForceToApply = rb.velocity;
-
-        //delayedForceToApply = forceToApply;
-        Invoke(nameof(DelayedDashForce), 0.025f);
-
-        Invoke(nameof(ResetDash), dashDuration);
+     
     }
 
     private void Dash2()
