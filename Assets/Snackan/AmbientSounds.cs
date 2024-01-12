@@ -52,20 +52,21 @@ public class AmbientSounds : MonoBehaviour
     }
     IEnumerator goofyuncle()
     {
-        MarkerA:
+    yield return new WaitForSeconds(20f); //initial wait to make the later parts more accurate
+    MarkerA:
         while (ac.inSafeZone == false)
         {
             if (rb.velocity.magnitude == 0)
             {
                 print("standstill");
-                Invoke("randomStandstillSound", Random.Range(20, 30));
-                yield return new WaitForSeconds(20f);
+                Invoke("randomStandstillSound", Random.Range(0, 10));
+               
             }
             else
             {
                 print("moving");
-                Invoke("randomWalkSound", Random.Range(30, 50));
-                yield return new WaitForSeconds(30f);
+                Invoke("randomWalkSound", Random.Range(10, 30));
+                yield return new WaitForSeconds(10f);
             }
         }
         yield return new WaitUntil(() => ac.inSafeZone == false);
