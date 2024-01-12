@@ -78,8 +78,8 @@ public class TheMove : MonoBehaviour
 
 
 
-    //Animator m_Animator;
-    //public Animator animator;
+    Animator m_Animator;
+    public Animator animator;
 
     Rigidbody rb;
 
@@ -103,7 +103,7 @@ public class TheMove : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         // Tr = GetComponent<TrailRenderer>();
         rb.freezeRotation = true;
-        /*m_Animator = FindObjectOfType<Animator>();*/
+        m_Animator = FindObjectOfType<Animator>();
         readyToJump = true;
         tr.emitting = false;
     }
@@ -163,7 +163,7 @@ public class TheMove : MonoBehaviour
         //m_Animator.transform.localEulerAngles = Vector3.zero;
 
 
-        /*if (Input.GetKey(Forward))
+        if (Input.GetKey(Forward))
         {
             m_Animator.SetFloat("Run", moveSpeed);
         }
@@ -186,7 +186,7 @@ public class TheMove : MonoBehaviour
         {
             m_Animator.SetFloat("Run", 0);
         }
-        */
+        
 
         // when to jump
       /*  if (Input.GetButtonDown("Jump") && readyToJump && grounded)
