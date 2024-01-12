@@ -277,7 +277,6 @@ GameObject:
   - component: {fileID: 1179181603}
   - component: {fileID: 1179181602}
   - component: {fileID: 1179181601}
-  - component: {fileID: 1179181600}
   m_Layer: 0
   m_Name: PlayerObj
   m_TagString: Untagged
@@ -299,18 +298,6 @@ Transform:
   m_Father: {fileID: 1947661778}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1179181600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1179181598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bea31e7bd96bc54aa2eb1c21db05e1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!136 &1179181601
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -735,6 +722,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1947661778}
   - component: {fileID: 1947661777}
+  - component: {fileID: 1947661780}
   - component: {fileID: 1947661776}
   - component: {fileID: 1947661775}
   - component: {fileID: 1947661779}
@@ -794,6 +782,7 @@ MonoBehaviour:
   groundDrag: 6
   tr: {fileID: 0}
   jumpForce: 10
+  jumpForceDown: 0
   jumpCooldown: 0.25
   airMultiplier: 0.4
   walkSpeed: 0
@@ -865,3 +854,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Stamina: 100
   MaxStamina: 100
+--- !u!114 &1947661780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947661774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bea31e7bd96bc54aa2eb1c21db05e1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
