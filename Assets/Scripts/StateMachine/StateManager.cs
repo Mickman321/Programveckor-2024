@@ -8,14 +8,37 @@ public abstract class StateManager<Estate> : MonoBehaviour where Estate : Enum
 
     protected BaseState<Estate> CurrentState;
 
+    protected bool IsTransitioningState = false;
+
     void Start()
     {
         CurrentState.EnterState();
     }
     void Update()
     {
-        CurrentState.UpdateState();
+        Estate nextStateKey = CurrentState.GetNextState();
+
+        if (!IsTransitioningState && nextStateKey.Equals(CurrentState.StateKey))
+        {
+            CurrentState.UpdateState();
+        }
+        else if (!IsTransitioningState)
+        {
+            TransitionToState(nextStateKey);
+        }
+
+       
     }
+
+    public void TransitionToState(Estate statekey)
+    {
+        IsTransitioningState = true;
+        CurrentState.ExitState();
+        CurrentState = States[statekey];
+        CurrentState.EnterState();
+        IsTransitioningState = false;
+    }
+
     void OnTriggerEnter(Collider other)
     {
         CurrentState.OnTriggerEnter(other);

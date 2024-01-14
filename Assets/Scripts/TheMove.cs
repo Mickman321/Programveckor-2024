@@ -135,10 +135,12 @@ public class TheMove : MonoBehaviour
             //isJumping = true;
             //jumpTimeCounter = jumpTime;
             rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-
+            exitingSlope = true;
             // rb.AddForce(velocity = Vector3.up * jumpHeight);
             // rb.AddForce(transform.up * jumpHeight);
         }
+      
+        
     }
 
     
@@ -150,8 +152,9 @@ public class TheMove : MonoBehaviour
         if(!grounded && !Input.GetButton("Jump"))
         {
             rb.AddForce(-transform.up * jumpForceDown);
-
+            exitingSlope = false;
         }
+     
     }
 
     private void MyInput()
