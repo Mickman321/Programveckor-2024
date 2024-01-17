@@ -17,6 +17,9 @@ public class ProceduralAnimations : MonoBehaviour
     [Range(0, 1)] [SerializeField] private float pelvisUpAndDownSpeed = 0.28f;
     [Range(0, 1)] [SerializeField] private float feetToIkPosistionSpeed = 0.5f;
 
+    [SerializeField] private Transform leftFoot;
+    [SerializeField] private Transform rightFoot;
+
     public string leftFootAnimationVariableName = "LeftFootCurve";
     public string rightFootAnimationVariableName = "RightFootCurve";
 
@@ -147,7 +150,24 @@ public class ProceduralAnimations : MonoBehaviour
 
     private void AdjustFeetTarget(ref Vector3 feetPositions, HumanBodyBones foot)
     {
-        feetPositions = animator.GetBoneTransform(foot).position;
+        Transform footTransform;
+
+        switch (foot)
+        {
+            case HumanBodyBones.LeftFoot:
+                footTransform = leftFoot;
+                break;
+
+            case HumanBodyBones.RightFoot:
+                footTransform = rightFoot;
+                break;
+
+            default:
+                footTransform = animator.GetBoneTransform(foot);
+                break;
+        }
+
+        feetPositions = footTransform.position;
         feetPositions.y = transform.position.y + heightFromGroundRaycast;
     }
 }
