@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NewMove : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class NewMove : MonoBehaviour
     public GameObject thirdPersonCam;
     public GameObject combatCam;
     public GameObject topDownCam;
-
+    public Behaviour PasscodeCanvas;
     public CameraStyle currentStyle;
     public enum CameraStyle
     {
@@ -28,8 +29,9 @@ public class NewMove : MonoBehaviour
 
     private void Start()
     {
-       // Cursor.lockState = CursorLockMode.Locked;
-      //  Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+       
     }
 
     private void Update()
@@ -60,6 +62,17 @@ public class NewMove : MonoBehaviour
             orientation.forward = dirToCombatLookAt.normalized;
 
             playerObj.forward = dirToCombatLookAt.normalized;
+        }
+
+        if (PasscodeCanvas.enabled)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
     }
 
