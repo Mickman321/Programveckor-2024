@@ -7,7 +7,10 @@ public class OpenPasscode : MonoBehaviour
 {
     public Behaviour PasscodeCanvas;
 
-
+    private void Start()
+    {
+        PasscodeCanvas.enabled = !PasscodeCanvas.enabled;
+    }
 
     // Update is called once per frame
     void Update()
