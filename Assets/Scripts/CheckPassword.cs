@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class CheckPassword : MonoBehaviour
 {
+    public bool door;
     public InputField input;
     public GameObject Button0;
     public GameObject Button1;
@@ -67,10 +68,13 @@ public class CheckPassword : MonoBehaviour
     {
         if (input.text == "")
         {
+            door = true;
             Debug.Log("Success");
+
         }
         else
         {
+            door = false;
             Debug.Log("Failed");
         }
     }
