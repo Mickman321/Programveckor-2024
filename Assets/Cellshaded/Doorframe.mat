@@ -21,8 +21,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Doorframe
-  m_Shader: {fileID: 4800000, guid: e88aeddd2ef1f934d805981244872e27, type: 3}
-  m_ShaderKeywords: _HALFTONESHAPE_DOT _OUTLINE _SPECULAR_COLOR _TOON_SHADING_ON
+  m_Shader: {fileID: 4800000, guid: 933f24cde1e3f6a41818f56d729421ab, type: 3}
+  m_ShaderKeywords: _HALFTONESHAPE_DOT _OUTLINE _SPECULARHIGHLIGHTS_OFF
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -200,23 +200,23 @@ Material:
     - _StepViaRampTexture: 0
     - _Surface: 0
     - _ToonBlending: 1
-    - _ToonEnabled: 1
+    - _ToonEnabled: 0
     - _UseRampColor: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 1}
+    - _BaseColor: {r: 0, g: 0, b: 0, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FaceFrontDirection: {r: 0, g: 0, b: 1, a: 0}
     - _FaceRightDirection: {r: 1, g: 0, b: 0, a: 0}
     - _HairSpecColor: {r: 0, g: 0, b: 0, a: 1}
     - _HalfToneColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HatchingColor: {r: 1, g: 0.9858491, b: 0.9858491, a: 1}
+    - _HatchingColor: {r: 0.122774996, g: 0.2924528, b: 0.2877574, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineDistancFade: {r: -200, g: 200, b: 0, a: 0}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
-    - _SpecColor: {r: 0.199972, g: 0.199972, b: 0.199972, a: 0.5}
+    - _SpecColor: {r: 0.19997197, g: 0.19997197, b: 0.19997197, a: 0.5}
     - _SpherizeNormalOrigin: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
