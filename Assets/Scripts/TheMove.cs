@@ -106,22 +106,49 @@ public class TheMove : MonoBehaviour
         m_Animator = FindObjectOfType<Animator>();
         readyToJump = true;
         tr.emitting = false;
+        m_Animator.SetBool("IsJumping", false);
+        isJumping = false;
+        m_Animator.SetBool("IsFalling", false);
     }
 
     private void Update()
     {
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
 
         MyInput();
         SpeedControl();
 
         // handle drag
         if (grounded)
-            rb.drag = groundDrag;
+        {
+            m_Animator.SetBool("IsGrounded", true);
+            isGrounded = true;
+            
 
-        else
+            rb.drag = groundDrag;
+            m_Animator.SetBool("IsJumping", false);
+            isJumping = false;
+            m_Animator.SetBool("IsFalling", false);
+            
+        }
+
+        else 
+        { 
             rb.drag = 0;
+
+            m_Animator.SetBool("IsGrounded", false);
+            isGrounded = false;
+           
+
+            if((isJumping && rb.velocity.y < 0) || rb.velocity.y < -2)
+            {
+                m_Animator.SetBool("IsFalling", true);
+               // m_Animator.SetBool("IsIdle", false);
+
+            }
+        }
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && dasher && !isGrounded)
         {
@@ -136,6 +163,8 @@ public class TheMove : MonoBehaviour
             //jumpTimeCounter = jumpTime;
             rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
             exitingSlope = true;
+            m_Animator.SetBool("IsJumping", true);
+            isJumping = true;
             // rb.AddForce(velocity = Vector3.up * jumpHeight);
             // rb.AddForce(transform.up * jumpHeight);
         }
@@ -153,6 +182,8 @@ public class TheMove : MonoBehaviour
         {
             rb.AddForce(-transform.up * jumpForceDown);
             exitingSlope = false;
+            m_Animator.SetBool("IsJumping", true);
+            isJumping = true;
         }
      
     }
@@ -164,7 +195,7 @@ public class TheMove : MonoBehaviour
 
         // m_Animator.transform.localPosition = Vector3.zero;
         //m_Animator.transform.localEulerAngles = Vector3.zero;
-
+       // grounded &&
 
         if (Input.GetKey(Forward))
         {
@@ -188,6 +219,8 @@ public class TheMove : MonoBehaviour
         else
         {
             m_Animator.SetFloat("Run", 0);
+           // m_Animator.SetBool("IsFalling", true);
+
         }
         
 
