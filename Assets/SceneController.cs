@@ -33,4 +33,9 @@ public class SceneController : MonoBehaviour
     {
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
     }
+
+    public void ToSafeZone()
+    {
+        SceneManager.LoadScene("SafeZone");
+    }
 }
