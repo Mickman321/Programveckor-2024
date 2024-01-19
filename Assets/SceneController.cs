@@ -31,7 +31,7 @@ public class SceneController : MonoBehaviour
 
     public void NextLevel3()
     {
-        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("Path3");
     }
 
     public void ToSafeZone()
