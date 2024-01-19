@@ -66,7 +66,7 @@ public class CheckPassword : MonoBehaviour
     }
     public void enterEvent()
     {
-        if (input.text == "")
+        if (input.text == "573")
         {
             door = true;
             Debug.Log("Success");

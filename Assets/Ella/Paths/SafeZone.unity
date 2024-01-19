@@ -199,7 +199,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 25322104}
-  m_LocalRotation: {x: 0.2116997, y: 4.4304007e-15, z: -8.4673246e-16, w: 0.9773348}
+  m_LocalRotation: {x: 0.2116997, y: 0.000000018001382, z: -0.0000000038992645, w: 0.9773348}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -866,7 +866,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh42572
+  m_Name: pb_Mesh22908
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7988,7 +7988,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh42500
+  m_Name: pb_Mesh22806
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -17637,7 +17637,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1137575245}
-  m_LocalRotation: {x: 0.2116997, y: 0.0000000051533853, z: -0.0000000011162707, w: 0.9773348}
+  m_LocalRotation: {x: 0.2116997, y: 0.0000000051533835, z: -0.0000000011162703, w: 0.9773348}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -22617,7 +22617,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1191197227}
-  m_LocalRotation: {x: 0.21169971, y: 0.000000015448325, z: -0.0000000033462493, w: 0.9773348}
+  m_LocalRotation: {x: 0.21169971, y: 0.000000015448322, z: -0.0000000033462486, w: 0.9773348}
   m_LocalPosition: {x: -19.4, y: 39.8, z: -4.6900005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -23288,7 +23288,7 @@ GameObject:
   - component: {fileID: 1409784511}
   - component: {fileID: 1409784510}
   - component: {fileID: 1409784509}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Arch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34621,17 +34621,9 @@ MonoBehaviour:
   assetGuid: 
   m_Mesh: {fileID: 253128336}
   m_IsSelectable: 1
-  m_SelectedFaces: 2e000000
-  m_SelectedEdges:
-  - a: 184
-    b: 185
-  - a: 187
-    b: 184
-  - a: 185
-    b: 186
-  - a: 186
-    b: 187
-  m_SelectedVertices: b8000000b9000000bb000000ba000000
+  m_SelectedFaces: 
+  m_SelectedEdges: []
+  m_SelectedVertices: 
 --- !u!4 &1939652964
 Transform:
   m_ObjectHideFlags: 0
@@ -35037,7 +35029,7 @@ GameObject:
   - component: {fileID: 2048321338}
   - component: {fileID: 2048321337}
   - component: {fileID: 2048321336}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35343,7 +35335,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh42598
+  m_Name: pb_Mesh22936
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -35731,7 +35723,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2112631964}
-  m_LocalRotation: {x: 0.16604482, y: 0.000000018970272, z: -0.0000000031942577, w: 0.9861182}
+  m_LocalRotation: {x: 0.16604483, y: -0.000000018970269, z: 0.0000000031942573, w: 0.9861182}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
