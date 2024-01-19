@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/oscar.unity
     guid: a35260f287c12d647a6286fa9143df05
+  - enabled: 1
+    path: Assets/Ella/Paths/Path3.unity
+    guid: 7b0d77f2133725b4680a0d8d6cc92aa6
   m_configObjects: {}
