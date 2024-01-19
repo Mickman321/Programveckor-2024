@@ -8,7 +8,7 @@ public class TP : MonoBehaviour
     public Transform target;
 
     private bool teleport;
-    // private CharacterController controller;
+ 
 
     Rigidbody rb;
 
