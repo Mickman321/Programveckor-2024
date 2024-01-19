@@ -26,10 +26,15 @@ public class TP : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        rb = other.gameObject.GetComponent<Rigidbody>();
-        teleport = false;
-        other.gameObject.transform.position = target.position;
-        teleport = true;
+
+        if (other.gameObject.tag == "TP")
+        {
+            rb = other.gameObject.GetComponent<Rigidbody>();
+            teleport = false;
+            other.gameObject.transform.position = target.position;
+            teleport = true;
+        }
+      
     }
 
 }
