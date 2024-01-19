@@ -10,12 +10,12 @@ public class TP : MonoBehaviour
     private bool teleport;
  
 
-    Rigidbody rb;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+      
     }
 
     // Update is called once per frame
@@ -29,7 +29,6 @@ public class TP : MonoBehaviour
 
         if (other.gameObject.tag == "TP")
         {
-            rb = other.gameObject.GetComponent<Rigidbody>();
             teleport = false;
             other.gameObject.transform.position = target.position;
             teleport = true;
