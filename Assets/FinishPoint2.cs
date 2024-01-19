@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Finishpoint : MonoBehaviour
+public class FinishPoint2 : MonoBehaviour
 {
     private void OnTriggerEnter(Collider collision)
     {
@@ -10,7 +10,7 @@ public class Finishpoint : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             print("ok");
-            SceneController.instance.NextLevel1();
+            SceneController.instance.NextLevel2();
         }
     }
 }
