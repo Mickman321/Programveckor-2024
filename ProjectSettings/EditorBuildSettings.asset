@@ -5,16 +5,22 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Ella/Ella.unity
     guid: 32cb06b1851a1454eb1a4fbd0b46b934
   - enabled: 0
-    path: Assets/Scenes/oscar.unity
-    guid: a35260f287c12d647a6286fa9143df05
-  - enabled: 0
+    path: Assets/Ella/SceneTransitions.unity
+    guid: 70dd03a8b1893244485f401577c96f3e
+  - enabled: 1
+    path: Assets/Ella/SafeZone.unity
+    guid: 7c7e7c8b02468c740aa687e7ff9d131b
+  - enabled: 1
     path: Assets/Ella/Paths/Path1.unity
     guid: 4e7d00b7ca7a03d4d81ff6c933572738
-  - enabled: 0
+  - enabled: 1
     path: Assets/Ella/Paths/Path2.unity
     guid: 43d5014818038ee4a82442127b90c279
+  - enabled: 1
+    path: Assets/Scenes/oscar.unity
+    guid: a35260f287c12d647a6286fa9143df05
   m_configObjects: {}
