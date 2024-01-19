@@ -63,8 +63,9 @@ public class AmbientSounds : MonoBehaviour
 
     IEnumerator SoundLoop()
     {
-    yield return new WaitForSeconds(20f); //Initial wait to make the later parts more accurate
     MarkerA:
+        yield return new WaitForSeconds(20f); //Initial wait to make the later parts more accurate
+ 
         if (ac.inSafeZone == false)
         {
             if (rb.velocity.magnitude == 0)
