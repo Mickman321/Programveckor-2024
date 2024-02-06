@@ -15,4 +15,12 @@ public class SpotlightCollision : MonoBehaviour
     {
         
     }
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.tag == "SpotLight")
+        {
+            Debug.Log("Detected");
+        }
+    }
+    
 }
