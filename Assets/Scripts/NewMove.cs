@@ -11,9 +11,16 @@ public class NewMove : MonoBehaviour
     public Transform playerObj;
     public Rigidbody rb;
 
+    public Transform cam;
+
+    public float turnSmoothTime = 0.1f;
+    float turnSmoothVelocity;
+
     public float rotationSpeed;
 
     public Transform combatLookAt;
+
+    private TheMove pm;
 
     public GameObject thirdPersonCam;
     public GameObject combatCam;
@@ -31,7 +38,8 @@ public class NewMove : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-       
+        pm = GetComponent<TheMove>();
+
     }
 
     private void Update()
@@ -54,6 +62,30 @@ public class NewMove : MonoBehaviour
 
             if (inputDir != Vector3.zero)
                 playerObj.forward = Vector3.Slerp(playerObj.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
+
+          /*  Vector3 direction = new Vector3(x, 0f, z).normalized;
+
+            if (direction.magnitude >= 0.1f)
+            {
+                float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+                transform.rotation = Quaternion.Euler(30f, angle, 0f);
+
+
+               // Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+              //  controller.Move(moveDir.normalized * speed * Time.deltaTime);
+
+            }
+            else if (direction.magnitude >= 0f)
+            {
+                float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+                transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+
+
+
+            }*/
         }
 
         else if (currentStyle == CameraStyle.Combat)

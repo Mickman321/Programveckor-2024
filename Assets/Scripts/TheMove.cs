@@ -7,6 +7,8 @@ public class TheMove : MonoBehaviour
 {
     [Header("Movement")]
     public float moveSpeed;
+    public float walkSpeed;
+    public float sprintSpeed;
 
     public float dashSpeed;
 
@@ -18,22 +20,33 @@ public class TheMove : MonoBehaviour
     private bool isMovingForward = false;
     private bool isMovingBackwards = false;
 
+    public Transform cam;
+
+    public float turnSmoothTime = 0.1f;
+    float turnSmoothVelocity;
+
     public float jumpForce;
     public float jumpForceDown;
     public float jumpCooldown;
     public float airMultiplier;
     bool readyToJump;
 
-    [HideInInspector] public float walkSpeed;
-    [HideInInspector] public float sprintSpeed;
+   
 
     [Header("Slope Handling")]
     public float maxSlopeAngle;
     private RaycastHit slopeHit;
     private bool exitingSlope;
 
+    [Header("Crouching")]
+    public float crouchSpeed;
+   /* public float crouchYScale;
+    private float startYScale;*/
+
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
+    public KeyCode crouchKey = KeyCode.LeftControl;
+    public KeyCode sprintKey = KeyCode.LeftShift;
 
     [SerializeField]
     KeyCode Forward;
@@ -92,6 +105,7 @@ public class TheMove : MonoBehaviour
         climbing,
         dashing,
         air,
+       // crouching,
     }
 
     public bool dashing;
@@ -109,6 +123,7 @@ public class TheMove : MonoBehaviour
         m_Animator.SetBool("IsJumping", false);
         isJumping = false;
         m_Animator.SetBool("IsFalling", false);
+       // startYScale = transform.localScale.y;
     }
 
     private void Update()
@@ -142,7 +157,7 @@ public class TheMove : MonoBehaviour
             isGrounded = false;
            
 
-            if((isJumping && rb.velocity.y < 0) || rb.velocity.y < -2)
+            if((isJumping && rb.velocity.y < 2) || rb.velocity.y < -2)
             {
                 m_Animator.SetBool("IsFalling", true);
                // m_Animator.SetBool("IsIdle", false);
@@ -193,6 +208,7 @@ public class TheMove : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
+
         // m_Animator.transform.localPosition = Vector3.zero;
         //m_Animator.transform.localEulerAngles = Vector3.zero;
        // grounded &&
@@ -222,27 +238,80 @@ public class TheMove : MonoBehaviour
            // m_Animator.SetBool("IsFalling", true);
 
         }
-        
+
+        if (Input.GetKey(Forward))
+        {
+            m_Animator.SetFloat("Sprint", moveSpeed);
+        }
+
+        else if (Input.GetKey(Left))
+        {
+            m_Animator.SetFloat("Sprint", moveSpeed);
+        }
+
+        else if (Input.GetKey(Right))
+        {
+            m_Animator.SetFloat("Sprint", moveSpeed);
+        }
+
+        else if (Input.GetKey(Backward))
+        {
+            m_Animator.SetFloat("Sprint", moveSpeed);
+        }
+        else
+        {
+            m_Animator.SetFloat("Sprint", 0);
+            // m_Animator.SetBool("IsFalling", true);
+
+        }
+
+        if (Input.GetKeyDown(crouchKey))
+        {
+            // rb.AddForce(moveDirection.normalized * crouchSpeed, ForceMode.Force);
+            moveSpeed = crouchSpeed;
+            m_Animator.SetBool("IsCrouching", true);
+        }
+
+
+        // stop crouch
+        if (Input.GetKeyUp(crouchKey))
+        {
+            moveSpeed = 12f;
+            m_Animator.SetBool("IsCrouching", false);
+        }
+
+        if (Input.GetKeyDown(sprintKey))
+        {
+            // rb.AddForce(moveDirection.normalized * crouchSpeed, ForceMode.Force);
+            moveSpeed = sprintSpeed;
+        }
+
+
+        // stop crouch
+        if (Input.GetKeyUp(sprintKey))
+        {
+            moveSpeed = 12f;
+        }
 
         // when to jump
-      /*  if (Input.GetButtonDown("Jump") && readyToJump && grounded)
-        {
-            readyToJump = false;
+        /*  if (Input.GetButtonDown("Jump") && readyToJump && grounded)
+          {
+              readyToJump = false;
 
-            Jump();
+              Jump();
 
-            Invoke(nameof(ResetJump), jumpCooldown);
-        }
-        /* if (grounded == true && Input.GetButtonDown("Jump")) // Den här kollar om spelaren är på marken om den är så ska man kunna man kunna trycka på space för att hoppa.
-         {
-             print("ground jump");
-             isJumping = true;
-             jumpTimeCounter = jumpTime;
-             rb.velocity = Vector3.up * jumpForce;
-         }
+              Invoke(nameof(ResetJump), jumpCooldown);
+          }
+          /* if (grounded == true && Input.GetButtonDown("Jump")) // Den här kollar om spelaren är på marken om den är så ska man kunna man kunna trycka på space för att hoppa.
+           {
+               print("ground jump");
+               isJumping = true;
+               jumpTimeCounter = jumpTime;
+               rb.velocity = Vector3.up * jumpForce;
+           }
 
-         if (Input.GetButton("Jump") && isJumping == true) /* Den här koden ser till så att när spelaren trycker på space och inte håller ner space
-                                                                så blir det ett kortare hopp och den ser också till så att det inte funkar i luften.*/
+           if (Input.GetButton("Jump") && isJumping == true) /* Den här koden ser till så att när spelaren trycker på space och inte håller ner space
+                                                                  så blir det ett kortare hopp och den ser också till så att det inte funkar i luften.*/
         /* {
 
 
@@ -261,6 +330,18 @@ public class TheMove : MonoBehaviour
          else
          {
              isJumping = false;
+         }*/
+        // start crouch
+        /* if (Input.GetKeyDown(crouchKey))
+         {
+             transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
+             rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
+         }
+
+         // stop crouch
+         if (Input.GetKeyUp(crouchKey))
+         {
+             transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
          }*/
     }
 
@@ -281,10 +362,36 @@ public class TheMove : MonoBehaviour
         // on ground
        else if (grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
-
+      
         // in air
         else if (!grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+
+      //  Vector3 direction = new Vector3(horizontalInput, 0f, verticalInput).normalized;
+
+        /*if (direction.magnitude >= 0.1f)
+        {
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+            transform.rotation = Quaternion.Euler(30f, angle, 0f);
+
+
+            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            //(moveDir.normalized * speed * Time.deltaTime);
+            // calculate movement direction
+            moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+
+        }
+        else if (direction.magnitude >= 0f)
+        {
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+
+
+
+        }*/
 
         // turn gravity off while on slope
         rb.useGravity = !OnSlope();
@@ -379,10 +486,30 @@ public class TheMove : MonoBehaviour
     }
     private void StateHandler()
     {
+       /* if (Input.GetKey(crouchKey))
+        {
+            state = MovementState.crouching;
+            moveSpeed = crouchSpeed;
+        }*/
+
         if (dasher)
         {
             state = MovementState.dashing; 
             moveSpeed = dashSpeed;
+        }
+
+        // Mode - Sprinting
+        else if (grounded && Input.GetKey(sprintKey))
+        {
+            state = MovementState.sprinting;
+            moveSpeed = sprintSpeed;
+        }
+
+        // Mode - Walking
+        else if (grounded)
+        {
+            state = MovementState.walking;
+            moveSpeed = walkSpeed;
         }
 
         // Mode - wallrunning
