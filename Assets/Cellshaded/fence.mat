@@ -217,6 +217,6 @@ Material:
     - _OutlineDistancFade: {r: -200, g: 200, b: 0, a: 0}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
-    - _SpecColor: {r: 0.1999782, g: 0.1999782, b: 0.1999782, a: 0.5}
+    - _SpecColor: {r: 0.19997814, g: 0.19997814, b: 0.19997814, a: 0.5}
     - _SpherizeNormalOrigin: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

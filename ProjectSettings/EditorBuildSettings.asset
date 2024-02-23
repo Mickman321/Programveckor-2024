@@ -11,19 +11,25 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Ella/SceneTransitions.unity
     guid: 70dd03a8b1893244485f401577c96f3e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Ella/SafeZone.unity
     guid: 7c7e7c8b02468c740aa687e7ff9d131b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Ella/Path1.unity
     guid: e9b2d73cfb6934249ad7ed1bdc1694aa
-  - enabled: 1
+  - enabled: 0
     path: Assets/Ella/Paths/Path2.unity
     guid: 43d5014818038ee4a82442127b90c279
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/oscar.unity
     guid: a35260f287c12d647a6286fa9143df05
-  - enabled: 1
+  - enabled: 0
     path: Assets/Ella/Paths/Path3.unity
     guid: 7b0d77f2133725b4680a0d8d6cc92aa6
+  - enabled: 1
+    path: Assets/Scenes/First.unity
+    guid: 7f2041b4c60b68c41b805356818399b6
+  - enabled: 1
+    path: Assets/Scenes/Second.unity
+    guid: 3d5386fd0f870fe4e8d17fd4f57f0eb7
   m_configObjects: {}

@@ -117,7 +117,7 @@ public class TheMove : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         // Tr = GetComponent<TrailRenderer>();
         rb.freezeRotation = true;
-        m_Animator = FindObjectOfType<Animator>();
+        m_Animator = GetComponentInChildren<Animator>();
         readyToJump = true;
         tr.emitting = false;
         m_Animator.SetBool("IsJumping", false);
@@ -178,10 +178,19 @@ public class TheMove : MonoBehaviour
             //jumpTimeCounter = jumpTime;
             rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
             exitingSlope = true;
-            m_Animator.SetBool("IsJumping", true);
-            isJumping = true;
+            
+            
+                m_Animator.SetBool("IsJumping", true);
+                isJumping = true;
+            
+           
             // rb.AddForce(velocity = Vector3.up * jumpHeight);
             // rb.AddForce(transform.up * jumpHeight);
+        }
+        else if (grounded == false)
+        {
+            m_Animator.SetBool("IsFalling", true);
+            
         }
       
         
@@ -197,8 +206,9 @@ public class TheMove : MonoBehaviour
         {
             rb.AddForce(-transform.up * jumpForceDown);
             exitingSlope = false;
-            m_Animator.SetBool("IsJumping", true);
-            isJumping = true;
+            m_Animator.SetBool("IsJumping", false);
+            m_Animator.SetBool("IsFalling", true);
+            isJumping = false;
         }
      
     }
@@ -216,27 +226,52 @@ public class TheMove : MonoBehaviour
         if (Input.GetKey(Forward))
         {
             m_Animator.SetFloat("Run", moveSpeed);
+            if (Input.GetKey(crouchKey))
+            {
+                m_Animator.SetFloat("CrouchWalk", moveSpeed);
+            }
         }
 
         else if (Input.GetKey(Left))
         {
             m_Animator.SetFloat("Run", moveSpeed);
+            if (Input.GetKey(crouchKey))
+            {
+                m_Animator.SetFloat("CrouchWalk", moveSpeed);
+            }
         }
 
         else if (Input.GetKey(Right))
         {
             m_Animator.SetFloat("Run", moveSpeed);
+            if (Input.GetKey(crouchKey))
+            {
+                m_Animator.SetFloat("CrouchWalk", moveSpeed);
+            }
         }
 
         else if (Input.GetKey(Backward))
         {
             m_Animator.SetFloat("Run", moveSpeed);
+            if (Input.GetKey(crouchKey))
+            {
+                m_Animator.SetFloat("CrouchWalk", moveSpeed);
+            }
         }
         else
         {
             m_Animator.SetFloat("Run", 0);
-           // m_Animator.SetBool("IsFalling", true);
+            // m_Animator.SetBool("IsFalling", true);
+            m_Animator.SetFloat("CrouchWalk", 0);
+          //  m_Animator.SetBool("IsCrouching", false);
 
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            //m_Animator.SetFloat("Sprint", moveSpeed);
+            isJumping = true;
+            m_Animator.SetBool("IsJumping", true);
         }
 
         if (Input.GetKey(Forward))
@@ -262,14 +297,17 @@ public class TheMove : MonoBehaviour
         {
             m_Animator.SetFloat("Sprint", 0);
             // m_Animator.SetBool("IsFalling", true);
-
+           
         }
+
+
 
         if (Input.GetKeyDown(crouchKey))
         {
             // rb.AddForce(moveDirection.normalized * crouchSpeed, ForceMode.Force);
             moveSpeed = crouchSpeed;
             m_Animator.SetBool("IsCrouching", true);
+           // m_Animator.SetFloat("CrouchWalk", moveSpeed);
         }
 
 
@@ -278,6 +316,7 @@ public class TheMove : MonoBehaviour
         {
             moveSpeed = 12f;
             m_Animator.SetBool("IsCrouching", false);
+           // m_Animator.SetFloat("CrouchWalk", 0);
         }
 
         if (Input.GetKeyDown(sprintKey))

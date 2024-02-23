@@ -22,11 +22,11 @@ public class SceneController : MonoBehaviour
 
     public void NextLevel1()
     {
-        SceneManager.LoadScene("Path1");
+        SceneManager.LoadScene("First");
     }
     public void NextLevel2()
     {
-        SceneManager.LoadScene("Path2");
+        SceneManager.LoadScene("Second");
     }
 
     public void NextLevel3()
